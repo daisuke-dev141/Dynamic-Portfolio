@@ -11,8 +11,8 @@
             <div class="f-content">
                 <nav class="f-nav">
                     <ul>
-                        <li><a href="works.html">Works</a></li>
-                        <li><a href="#">About</a></li>
+                        <li><a href="<?php echo home_url("/works/"); ?>">Works</a></li>
+                        <li><a href="<?php echo home_url("/about/"); ?>">About</a></li>
                     </ul>
                 </nav>
                 <p class="f-copy"><small>&copy; 2025 DAISUKE TAKETOMI</small></p>

@@ -74,10 +74,10 @@
             <nav class="circle-menu">
                 <ul>
                     <li>
-                        <a href="works.html">Works</a>
+                        <a href="<?php echo home_url("/works/"); ?>">Works</a>
                     </li>
                     <li>
-                        <a href="about.html">About</a>
+                        <a href="<?php echo home_url("/about/"); ?>">About</a>
                     </li>
                 </ul>
             </nav>
