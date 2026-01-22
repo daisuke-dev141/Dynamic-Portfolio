@@ -234,3 +234,6 @@ function split_by_newline($text)
         preg_split("/\r\n|\n|\r/", $text, -1, PREG_SPLIT_NO_EMPTY)
     );
 }
+
+// ツールバーを非表示にしてくれる
+add_filter('show_admin_bar', '__return_false');

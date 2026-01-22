@@ -80,51 +80,66 @@ jQuery(function () {
 });
 
 
-const slideLength = document.querySelectorAll('.swiper-slide').length;
 
 function initSwiper() {
-    const mySwiper = new Swiper('.swiper', {
+    // Swiperの初期化前にスライド数を取得
+    const slideLength = document.querySelectorAll('.infinite-swiper .swiper-slide').length;
+
+    const mySwiper = new Swiper('.infinite-swiper', {
         spaceBetween: 16,
         slidesPerView: 2,
         loop: true,
-        loopedSlides: slideLength,
-        speed: 8000,
+        loopedSlides: slideLength, // 実際のスライド数を指定
+        speed: 100,
         autoplay: {
             delay: 0,
-            disableOnInteraction: false,
+            disableOnInteraction: false, // ユーザー操作後も自動再生を継続
+            pauseOnMouseEnter: false, // マウスホバーでも停止しない
         },
         freeMode: {
             enabled: true,
             momentum: false,
+            sticky: false, // スティッキーを無効化
         },
         grabCursor: true,
+        allowTouchMove: true, // タッチ操作を許可
         breakpoints: {
-
-            //425px以上のとき
             425: {
                 slidesPerView: 3,
                 spaceBetween: 20,
             },
-            //768px以上のとき
             768: {
                 slidesPerView: 4,
                 spaceBetween: 30,
             },
-            //1025px以上のとき
             1025: {
                 slidesPerView: 5,
                 spaceBetween: 32,
             }
         },
-        on: {
-            touchEnd: (swiper) => {
-                swiper.slideTo(swiper.activeIndex + 1);
-            }
-        },
-
+        // touchEndイベントを削除（これが原因で止まる）
+        // on: {
+        //     touchEnd: (swiper) => {
+        //         swiper.slideTo(swiper.activeIndex + 1);
+        //     }
+        // },
     });
-};
 
-window.addEventListener('load', function () {
+    // ユーザー操作後に自動再生を確実に再開
+    mySwiper.el.addEventListener('mouseenter', () => {
+        // 必要に応じてホバー時の処理
+    });
+
+    mySwiper.el.addEventListener('mouseleave', () => {
+        if (!mySwiper.autoplay.running) {
+            mySwiper.autoplay.start();
+        }
+    });
+}
+
+// DOMが完全に読み込まれた後に実行
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSwiper);
+} else {
     initSwiper();
-});
+}

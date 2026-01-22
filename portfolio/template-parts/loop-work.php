@@ -12,7 +12,7 @@
         </div>
         <div class="work-info">
             <h3><?php the_title(); ?></h3>
-            <p class="work-category">Design</p>
+            <p class="work-category"><?php the_field("classification"); ?></p>
         </div>
     </a>
 </article>
